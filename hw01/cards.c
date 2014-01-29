@@ -5,35 +5,7 @@ Prompts the user for a playing card name, then counts cards based
 on user input.
 Authors: Samantha Kumarasena, Head First C
 */
-int main() {
-	char card_name[3];
-	int count = 0;
-	do {
-		puts("Enter the card name: ");
-		scanf("%2s", card_name);
-		int val = 0;
 
-		switch(card_name[0]) {
-			case 'K':
-			case 'Q':
-			case 'J':
-				val = 10;
-				break;
-			case 'A':
-				val = 11;
-				break;
-			case 'X':
-				continue;
-			default:
-				val = atoi(card_name);
-				print_error(val);
-				continue;
-		}
-		count = change_count(val);
-		printf("Current count: %i\n", count);
-	} while (card_name[0] != 'X');
-	return 0;
-}
 
 /*
 Prints an error when the card value is invalid.
@@ -59,3 +31,35 @@ int change_count(int val) {
 	}
 	return c;
 }
+
+int main() {
+	char card_name[3];
+	int count;
+	do {
+		int val;
+		puts("Enter the card name: ");
+		scanf("%2s", card_name);
+
+
+		switch(card_name[0]) {
+			case 'K':
+			case 'Q':
+			case 'J':
+				val = 10;
+				break;
+			case 'A':
+				val = 11;
+				break;
+			case 'X':
+				continue;
+			default:
+				val = atoi(card_name);
+				print_error(val);
+				continue;
+		}
+		count = change_count(val);
+		printf("Current count: %i\n", count);
+	} while (card_name[0] != 'X');
+	return 0;
+}
+
