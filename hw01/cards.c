@@ -22,17 +22,28 @@ int main() {
 				continue;
 			default:
 				val = atoi(card_name);
-				if((val<1) || (val>10)) {
-					puts("I don't understand that value!");
-					continue;
-				}
+				print_error(val);
+				continue;
 		}
-		if ((val>2) && (val<7)) {
-			count++;
-		} else if (val == 10) {
-			count--;
-		}
+		count = change_count(val);
 		printf("Current count: %i\n", count);
 	} while (card_name[0] != 'X');
 	return 0;
+}
+
+int print_error(int val) {
+	if((val<1) || (val>10)) {
+	puts("I don't understand that value!");
+	}
+	return 0;
+}
+
+int change_count(int val) {
+	int c = 0;
+	if ((val>2) && (val<7)) {
+		c++;
+	} else if (val == 10) {
+		c--;
+	}
+	return c;
 }
