@@ -11,6 +11,7 @@ License: GNU GPLv3
 #define SIZE 5
 
 int *foo() {
+    //local variables -- stack allocated
     int i;
     int array[SIZE];
 
@@ -20,6 +21,8 @@ int *foo() {
 	array[i] = 17;
     }
     return array;
+    //after the function ends, the local variable disappears, meaning
+    //that the pointer refers to a variable that no longer exists!
 }
 
 void bar() {
@@ -38,7 +41,7 @@ int main()
     int i;
     int *array = foo();
     bar();
-
+    //you will see what bar has assigned to array, not foo!
     for (i=0; i<SIZE; i++) {
 	printf("%d\n", array[i]);
     }
