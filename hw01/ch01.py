@@ -88,7 +88,7 @@ def closed_loop( c, p, tm=5000 ):
     Gradually increasing setpoint
     """
     def setpoint( t ):
-        return t/6
+        return t/4
 
     y = 0
     e_prev = 0
@@ -108,7 +108,7 @@ def closed_loop( c, p, tm=5000 ):
 
 # ============================================================
 
-c = Controller( 1.25, 0.01, 1 )
+c = Controller( 1.25, 0.01, .1)
 p = Buffer( 50, 10 )
 
 # run the simulation
