@@ -22,9 +22,15 @@ char *tracks[] = {
 */
 char *strjoin(char *array[], int n)
 {
-    char *str = (char *) malloc(sizeof(char)*sizeof(array));
-
     int i;
+    int total = 1;
+    for (i = 0; i<n; i++) {
+        total += strlen(array[i]);
+
+    }
+
+    char *str = (char *) malloc(sizeof(char)*total);
+
     for(i = 0; i<n; i++) {
         str = strcat(str, array[i]);
     }
