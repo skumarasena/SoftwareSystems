@@ -26,17 +26,22 @@ char *center(char *s, int n, char fillchar)
     res[0] = '\0';
     char *str = res;
 
-    int i;
-    for (i = 0; i < num_fill/2; i++) {
-        str[i] = fillchar;
+    if(n <= len) {
+        res = s;
     }
+    else {
+        int i;
+        for (i = 0; i < num_fill/2; i++) {
+            str[i] = fillchar;
+        }
 
-    for(i = 0; i < strlen(s); i++) {
-        str[i + num_fill/2] = s[i];
-    }
+        for(i = 0; i < strlen(s); i++) {
+            str[i + num_fill/2] = s[i];
+        }
 
-    for(i = 0; i < n - (strlen(s) + num_fill/2); i++) {
-        str[i + num_fill/2 + strlen(s)] = fillchar;
+        for(i = 0; i < n - (strlen(s) + num_fill/2); i++) {
+            str[i + num_fill/2 + strlen(s)] = fillchar;
+        }
     }
 
     return res;
@@ -58,7 +63,7 @@ int main (int argc, char *argv[])
     char *s4 = center("Exam 1", 33, '^');
     printf("%s\n", s4);
 
-    char *s5 = center("allen", 10, '.');
+    char *s5 = center("allen", 4, '.');
     printf("%s\n", s5);
 
     return 0;
