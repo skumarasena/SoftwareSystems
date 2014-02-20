@@ -10,7 +10,7 @@ int main() {
 	char *j = strstr("Samantha Kumarasena", "Sam");
 	printf("%p\n", j);
 
-	int k = strcmp("Hi", "Hello");
+	int k = strcmp("Hello", "Hi");
 	printf("%i\n", k);
 
 

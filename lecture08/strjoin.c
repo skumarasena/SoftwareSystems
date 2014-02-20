@@ -17,7 +17,8 @@ char *tracks[] = {
     "Flamenco Sketches"
 };
 
-/* Returns a heap-allocated string that contains the strings 
+/* 
+    Returns a heap-allocated string that contains the strings 
    from the given array, joined up with no spaces between.
 */
 char *strjoin(char *array[], int n)
