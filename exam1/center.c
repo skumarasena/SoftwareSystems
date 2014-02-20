@@ -45,7 +45,6 @@ char *center(char *s, int n, char fillchar)
     }
 
     return res;
-    free(res);
 
 }
 
