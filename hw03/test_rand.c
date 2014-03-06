@@ -87,7 +87,7 @@ main (int argc, char *argv[])
   srandom (seed);
   t0 = get_seconds();
   for (i=0; i<iters; i++) {
-    f = my_random_float();
+    f = my_random_double();
   }
   t1 = get_seconds();
   printf ("mine \t %f ms\n", t1 - t0);
@@ -96,7 +96,7 @@ main (int argc, char *argv[])
   srandom (seed);
   t0 = get_seconds();
   for (i=0; i<iters; i++) {
-    f = my_random_float();
+    f = my_random_double();
   }
   t1 = get_seconds();
   printf ("mine \t %f ms\n", t1 - t0);
@@ -119,3 +119,39 @@ main (int argc, char *argv[])
   t1 = get_seconds();
   printf ("theirs \t %f ms\n", t1 - t0);    
 }
+
+
+/*
+//my_random_float
+
+dummy    19289.205000 ms
+dummy    19333.208000 ms
+
+dummy2   53867.367000 ms
+dummy2   57539.596000 ms
+
+mine     66384.149000 ms
+mine     65796.112000 ms
+
+theirs   57759.609000 ms
+theirs   57687.606000 ms
+
+*/
+
+
+/*
+//my_random_float2
+
+dummy    19365.210000 ms
+dummy    19521.220000 ms
+
+dummy2   55851.490000 ms
+dummy2   54975.436000 ms
+
+mine     119571.473000 ms
+mine     100758.297000 ms
+
+theirs   57467.591000 ms
+theirs   57707.607000 ms
+
+*/

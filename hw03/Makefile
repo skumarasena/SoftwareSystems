@@ -1,7 +1,9 @@
 # Modify this line to contain the path to the directory that contains
 # libmongo.a and src
-LIB = mongo-c-driver/src
+# LIB =  mongo-c-driver/src
+# LIB = /home/skumarasena/Documents/SoftSys/mongo-c-driver
 
+LIB = ../../mongo-c-driver/src
 
 # The -I flag tells the compiler where to look for include files.
 

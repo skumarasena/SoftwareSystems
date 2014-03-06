@@ -86,10 +86,45 @@ float my_random_float2()
   return b.f;
 }
 
-// compute a random double using my algorithm
+/* 
+Filled in function such that it generates random doubles.
+Thanks to help from Chloe Eghtenbas, Nicole Rifkin, and Eric Tappan!
+*/
 double my_random_double()
 {
-  // TODO: fill this in
+
+  unsigned long x;
+  long mant;
+  long exp = 1022; // 126;
+  int mask = 1;
+
+  union {
+    double d;
+    long l;
+  } b;
+
+  // generate random bits until we see the first set bit
+  while (1) {
+    x = (random() << 32) + random();
+    if (x == 0) {
+      exp -= 63;
+    } else {
+      break;
+    }
+  }
+
+  // find the location of the first set bit and compute the exponent
+  while (x & mask) {
+    mask <<= 1;
+    exp--;
+  }
+
+  // use the remaining bit as the mantissa
+  mant = x >> 11;
+  b.l = (exp << 52) | mant;
+
+  return b.d;
+
 }
 
 // return a constant (this is a dummy function for time trials)
