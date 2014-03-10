@@ -16,8 +16,8 @@ int main() {
 	uint64_t coef_mask = (one << 52) - 1;
 	uint64_t coef = pd.l & coef_mask;
 
-	printf("%d\n", sign);
-	printf("%d\n", exponent);
+	printf("%i\n", sign);
+	printf("%i\n", exponent);
 	printf("0x%x\n", coef);
 	
 }
