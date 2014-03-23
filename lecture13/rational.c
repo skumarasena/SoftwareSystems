@@ -27,7 +27,7 @@ Rational *make_rational(int numer, int denom) {
 
 // Computes a floating-point approximation of a Rational.
 double rational_to_double(Rational *rational) {
-    return (float) rational->numer/rational->denom;
+    return (double) rational->numer/rational->denom;
 }
 
 // Multiplies two rational numbers; returns a new Rational.
@@ -35,7 +35,7 @@ Rational *mult_rational(Rational *r1, Rational *r2) {
     Rational *rational = malloc(sizeof(Rational));
     rational->numer = r1->numer * r2-> numer;
     rational->denom = r1->denom * r2->denom;
-    
+
     return rational;
 }
 
