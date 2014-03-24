@@ -255,7 +255,7 @@ Node *prepend(Hashable *key, Value *value, Node *rest)
 Value *list_lookup(Node *list, Hashable *key)
 {
     // Node *n = list->next;
-    // Node *res = NULL;
+    // Value *res = NULL;
 
     // while(n != NULL) {
     //     if(n->key == key) {
@@ -265,11 +265,20 @@ Value *list_lookup(Node *list, Hashable *key)
     // }
     // return res;
 
-    if(equal_hashable(list->key, key)) {
+
+    Node *n = list->next;
+
+    if (list->key == key) {
         return list->value;
-    } else if (list->next) {
-        return list_lookup(list->next, key);
-    } else return NULL;
+    } else {
+        while(n) {
+            if(n->key == key) {
+                return n->value;
+            }
+            n = n->next;
+        }
+        return NULL;
+    }
     
 }
 
