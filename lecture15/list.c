@@ -74,7 +74,6 @@ int remove_by_value(Node **head, int val) {
         return 0;
     }
 
-
     if(current->val == val) {
         pop(head);
         return 1;

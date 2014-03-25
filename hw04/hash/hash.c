@@ -314,6 +314,8 @@ void print_map(Map *map)
     }
 }
 
+// Help from Evan for map_add and map_lookup.
+// Thank you, Evan!
 
 /* Adds a key-value pair to a map. */
 void map_add(Map *map, Hashable *key, Value *value)
