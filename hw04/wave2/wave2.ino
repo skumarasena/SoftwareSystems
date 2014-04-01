@@ -17,8 +17,8 @@ int ledPin = 5;       // select the pin for the LED
 int buttonPin1 = 2;
 int buttonPin2 = 3;
 
-void setup() {
-  Serial.begin(9600);
+void setup() 
+{  Serial.begin(9600);
   
   pinMode(buttonPin1, INPUT_PULLUP);  
   pinMode(buttonPin2, INPUT_PULLUP);  

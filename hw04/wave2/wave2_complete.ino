@@ -58,7 +58,7 @@ void setup()
 
     sei();
 
- 
+    attachInterrupt(buttonPin2, change, RISING);
 
 }
 
@@ -80,6 +80,10 @@ ISR(TIMER0_COMPA_vect) {
     // write to the digital pins  
     writeByte(counter);
 
+}
+
+void change() {
+    
 }
 
 void writeByte(int x) {
