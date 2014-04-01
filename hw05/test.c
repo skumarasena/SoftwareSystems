@@ -1,6 +1,5 @@
 
 // compile as follows
-// gcc `pkg-config --libs --cflags glib-2.0` helloworld.c -o helloworld                                  //NOPE!
 // gcc `pkg-config --cflags glib-2.0` helloworld.c -o helloworld `pkg-config --libs glib-2.0`
 
 #include <glib.h>
@@ -8,11 +7,11 @@
 #include <stdlib.h>
 
 
-/*Prints a single key-value pair in the hash table. For use with print_hash_table.*/
+/*Prints a single key-value pair in the hash table. For use with print_hash_table().*/
 
 static void print_row(gpointer key, gpointer val, gpointer userdata) {
-    GString* realKey = (GString*)key;
-    printf("Key: %s, Value: %i\n", realKey->str, *(int*)val);
+    GString* real_key = (GString*)key;
+    printf("Key: %s, Value: %i\n", real_key->str, *(int*)val);
 
 }
 
@@ -21,7 +20,8 @@ static void print_row(gpointer key, gpointer val, gpointer userdata) {
 /*Prints a hash table.*/ 
 
 void print_hash_table(GHashTable* hash) {
-    g_hash_table_foreach(hash, print_row, NULL);
+    //iterates through each key-value pair and executes the function print_row() on each pair.
+    g_hash_table_foreach(hash, print_row, NULL);    
 }
 
 
@@ -34,11 +34,11 @@ void hash_append(GHashTable* hash, GString* word)
   int *val = g_hash_table_lookup(hash, (gpointer)word);
  int *i = malloc(sizeof(int));
 
-  if(val==NULL) {
+  if(val==NULL) {   //if the word is not in the table, add it and give it a value of 1
     *i = 1;
     g_hash_table_insert(hash, (gpointer)word, (gpointer)i);  
   }
-  else {
+  else {    //if the word is in the table, increment its value
     *i = *val+1;
     g_hash_table_insert(hash, (gpointer)word, (gpointer)i);
   }
@@ -73,6 +73,7 @@ int main()
 {
     FILE* file = make_file();
 
+    //providing hash functions and equal functions
     GHashTable *hash = g_hash_table_new ((GHashFunc)g_string_hash, (GEqualFunc)g_string_equal);
 
     fill_table(hash, file);
