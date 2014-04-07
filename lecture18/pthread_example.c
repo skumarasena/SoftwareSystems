@@ -90,7 +90,7 @@ int main ()
   /* if the parent dies before the child, it usually takes the child
      with it!  Unless, that is, the parent calls pthread_exit, which
      forces it to wait for all threads to terminate. */
-
-  pthread_exit (NULL);
+ 
+ pthread_exit (NULL);
 }
 
