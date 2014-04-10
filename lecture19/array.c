@@ -10,7 +10,7 @@ License: Creative Commons Attribution-ShareAlike 3.0
 #include <pthread.h>
 #include "mutex.h"
 
-#define SIZE 1000
+#define SIZE 20000
 
 typedef struct {
     int next_id;
@@ -44,17 +44,36 @@ int get_next_id (Environment *env)
     return id;
 }
 
+/* Note: do not put a lock around the stuff inside the while loop!
+    There is an access at id = get_next_id(env) and env->array[id]. 
+    You need to fix both synchronization issues but putting a lock
+    around the whole thing creates a deadlock.
+
+    Deadlock: child thread gets the key, runs through the whole function. 
+    It returns from this function, still holding the lock. And it dies,
+    still holding the lock.
+    The parent is still blocked at the beginning of the while-loop. And
+    it will stay there, because it can't unlock itself.
+
+    Solution? A "shrink-wrap" in which you fit the locks very tightly to 
+    the synchronization problems (see below). In other words, a lock 
+    around the access, and a lock around the increment. */ 
+
 void loop_and_count (pthread_t self, Environment *env)
 {
     int id;
     
     while (1) {
-	id = get_next_id (env);
-	
-	// printf ("%d got %d\n", self, id);
-	
-	if (id >= SIZE) return;
-	env->array[id]++;
+        acquire(env->lock);
+    	id = get_next_id (env);
+        release(env->lock);
+    	
+    	// printf ("%d got %d\n", self, id);
+    	
+    	if (id >= SIZE) return;
+        acquire(env->lock);
+    	env->array[id]++;
+        release(env->lock);
     }
 }
 

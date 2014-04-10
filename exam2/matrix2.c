@@ -138,7 +138,7 @@ double matrix_sum2(Matrix *A) {
 }
     
 
-// Adds up the rows of A and returns a heap-allocated array of doubles.
+/*Adds up the rows of A and returns a heap-allocated array of doubles.*/
 double *row_sum(Matrix *A) {
     double total;
     int i, j;
@@ -155,6 +155,62 @@ double *row_sum(Matrix *A) {
     return res;
 }
 
+/*Adds up the columns of A and returns a heap-allocated array of doubles.*/
+double *col_sum(Matrix *A) {
+    double total;
+    int i, j;
+
+    double *res = malloc(A->cols * sizeof(double));
+
+    for (i=0; i<A->cols; i++) {
+    total = 0.0;
+    for (j=0; j<A->rows; j++) {
+        total += A->data[j][i];
+    }
+    res[i] = total;
+    }
+    return res;
+}
+
+/*Adds up the forward-facing and backward-facing diagonals of A.
+Returns a heap-allocated double array.*/
+double *diag_sum(Matrix *A) {
+    //total1: backward-facing diagonal
+    //total2: forward-facing diagonal
+    double total1, total2;
+    int i, j;
+    double *res = malloc(2* sizeof(double));
+
+    assert(A->rows == A->cols);
+
+    total1 = 0.0;
+    total2 = 0.0;
+    for (i=0; i<A->cols; i++) {
+        j = A->cols -i - 1;
+        total1 += A->data[i][i];        
+        total2 += A->data[j][i];
+    }
+    res[0] = total1;
+    res[1] = total2;
+    return res;
+
+}
+
+/*
+    Checks whether all elements of a given double array are the same.
+    d is the array, n is the size of the array.
+
+    From StackOverflow:
+    http://stackoverflow.com/questions/14120346/c-fastest-method-to-check-if-all-array-elements-are-equal
+*/
+
+int is_equal(double *d, int n) {
+
+    while(--n>0 && d[n]==d[0]);
+        return n==0;
+
+}
+
 /* 
    http://en.wikipedia.org/wiki/Magic_square
 
@@ -169,6 +225,36 @@ double *row_sum(Matrix *A) {
    Feel free to use row_sum().
 */
 
+int is_magic_square(Matrix *A) {
+    //ensure the matrix is actually a square
+    if(A->rows != A->cols) {
+        return 0;
+    }
+    
+    //Sum all the rows, and make sure all row sums are equivalent
+    double *sum = row_sum(A);
+    if(!is_equal(sum, A->rows)) {
+        return 0;
+    }
+
+    //Sum all the columns, and make sure all column sums are equivalent
+    //as well as equivalent to the row sums
+    double *sum2 = col_sum(A);
+    if(!is_equal(sum2, A->cols) || sum2[0] != sum[0]) {
+        return 0;
+    }
+
+    //Sum both diagonals, and make sure they are equivalent to each other
+    //as well as equivalent to the row sums
+    double *sum3 = diag_sum(A);
+    if(!is_equal(sum3, 2) || sum3[0] != sum[0]) {
+        return 0;
+    }
+
+    return 1;
+    
+}
+
 
 int main() {
     int i;
@@ -178,14 +264,14 @@ int main() {
     printf("A\n");
     print_matrix(A);
 
-    Matrix *C = add_matrix_func(A, A);
-    printf("A + A\n");
-    print_matrix(C);
-
     Matrix *B = make_matrix(4, 3);
     increment_matrix(B, 1);
     printf("B\n");
     print_matrix(B);
+
+    Matrix *C = add_matrix_func(A, A);
+    printf("A + A\n");
+    print_matrix(C);
 
     Matrix *D = mult_matrix_func(A, B);
     printf("D\n");
@@ -201,7 +287,17 @@ int main() {
     for (i=0; i<A->rows; i++) {
 	printf("row %d\t%lf\n", i, sums[i]);
     }
+
     // should print 6, 22, 38
+
+
+    //a test of the magic square.
+    printf("\n\nMAGIC SQUARE TEST: E\n");
+    Matrix *E = make_matrix(3, 3);
+    increment_matrix(E, 1);
+    print_matrix(E);
+
+    printf("MAGIC: %i\n", is_magic_square(E));
 
     return 0;
 }
