@@ -38,6 +38,7 @@ int main (int argc, char *argv[])
   double start, stop;
   int i, num_children;
 
+
   // the first command-line argument is the name of the executable.
   // if there is a second, it is the number of children to create.
   if (argc == 2) {

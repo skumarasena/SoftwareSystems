@@ -7,7 +7,7 @@ License: Creative Commons Attribution-ShareAlike 3.0
 
 #include <stdio.h>
 #include <stdlib.h>
-#include <pthread.h>
+#include <pthread.h>      //semaphore.h needs pthread.h -- include before.
 #include "semaphore.h"
 
 // UTILITY CODE

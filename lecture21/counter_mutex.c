@@ -81,6 +81,7 @@ void join_thread (pthread_t thread)
 
 void child_code (Shared *shared)
 {
+  int int dex;
   printf ("Starting child at counter %d\n", shared->counter);
 
   while (1) {
