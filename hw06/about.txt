@@ -1,0 +1,12 @@
+An Introduction to Objective-C
+Software Systems, Final LKM
+Samantha Kumarasena and Deborah Hellen
+
+For this project, we completed two tutorials: "Try Objective-C" and "Try iOS" through CodeSchool. 
+
+Try Objective-C: http://tryobjectivec.codeschool.com/
+Try iOS: https://www.codeschool.com/courses/try-ios
+
+Through these tutorials, we programmed 11 small apps. We have included two of the simpler apps we completed through these tutorials in this folder.
+
+
